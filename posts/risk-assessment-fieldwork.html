@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Fieldwork Taught Us About Information Security | Field Notes</title>
+<meta name="description" content="A reflection on conducting a real-world information security risk assessment, and what the process revealed about risk beyond the checklist.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-title" href="../index.html">Field Notes</a>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="article-main">
+
+  <div class="article-meta">
+    September 2026 <span class="dot">&middot;</span> Information Assurance and Security <span class="dot">&middot;</span> 7 min read
+  </div>
+
+  <h1 class="article-title">What Fieldwork Taught Us About Information Security: A Risk Assessment Reflection</h1>
+
+  <p class="article-standfirst">
+    We expected the hardest part of our risk assessment to be technical. What we did not expect was how much of the real work would be about people.
+  </p>
+
+  <div class="confidentiality-note">
+    <strong>A note on confidentiality.</strong> The organization we assessed is discussed in general terms only. No individuals are named, and no specific vulnerabilities, system details, or internal findings are disclosed.
+  </div>
+
+  <div class="article-body">
+
+    <p>When our group set out to conduct an information security risk assessment of a locally owned business in Butuan City, we expected the hardest part to be technical, such as spotting weak passwords, unpatched software, or a missing firewall rule. What we didn't expect was how much of the real work would be about <em>people</em>: how they use technology, how they talk about it, and how comfortable they were letting college students ask questions in their office. This reflection is less about the specific findings of our Risk Assessment Form and more about what the process taught us about information security in practice: the reasoning, the trade-offs, and the discipline it takes to turn a walkthrough into something structured and useful.</p>
+
+    <h2>Starting With a Framework, Not a Checklist</h2>
+
+    <p>Before we set foot in the organization, we had to decide how we were going to think about risk, not just what to look for. It's tempting to treat a risk assessment like a checklist: walk around, note anything that looks insecure, write it down. But that approach produces a pile of observations, not an assessment. What helped us was leaning on the logic found in established risk management frameworks: identify assets, identify the threats and vulnerabilities that could affect them, estimate likelihood and impact, and then decide on a treatment. This mirrors NIST Special Publication 800-30, which frames risk assessment as a structured sequence of preparing, conducting, communicating, and maintaining an understanding of risk (Ross, 2012). Even though that guide was written with federal systems in mind, the logic scales down well to a small, privately owned business.</p>
+
+    <p>Similarly, ISO/IEC 27001:2022 reinforced something we kept circling back to: information security isn't only about servers and software. The standard treats an information security management system as something that has to account for people, processes, and technology together, and requires that risk treatment fit the actual context of the organization rather than a generic template (International Organization for Standardization, 2022). That idea reshaped our interviews. We stopped asking &ldquo;do you have antivirus&rdquo; as a yes or no box, and started asking <em>why</em> certain practices existed the way they did, because the answer usually revealed more about the risk than the practice itself.</p>
+
+    <h2>Observation Taught Us to Separate Symptom From Cause</h2>
+
+    <p>Walking through the workplace, it was easy to spot surface-level issues. The harder and more valuable skill was resisting the urge to log the symptom and move on. For almost every physical or technical gap we noticed, the root cause traced back to something organizational: no written policy, no one clearly assigned to own IT decisions, or no time set aside for security in a small team focused on daily operations. This lines up with Verizon's Data Breach Investigations Report, which has repeatedly found that a majority of breaches involve a human element, whether a mistake, a misused credential, or a social engineering tactic, even as the exact percentage shifts year to year (Verizon Business, 2025). That is not only a technology story. It is an argument for treating training, ownership, and policy gaps as seriously as unpatched software.</p>
+
+    <p>That reframing changed how we wrote up our findings. Instead of only recording <em>what</em> was wrong, we noted <em>why</em> it existed, because a recommendation to &ldquo;install a firewall&rdquo; solves nothing if nobody has been assigned to maintain one.</p>
+
+    <h2>Reasoning Through Impact, Probability, and Treatment</h2>
+
+    <p>The most uncomfortable part of the assessment wasn't the site visit. It was sitting down afterward and rating each risk. The Risk Assessment Form asks for an impact rating (Minor, Moderate, Major) and a probability rating (Unlikely, Possible, Likely), which are multiplied into a risk score that places a risk as Low, Moderate, or Significant. On paper this looks mechanical. In practice it forced real debate in our group. Is a weak Wi-Fi password a Moderate impact or a Major one if the network does not separate guest and staff traffic? Is a missing backup routine &ldquo;Possible&rdquo; or &ldquo;Likely,&rdquo; given how rarely the organization experiences hardware problems?</p>
+
+    <p>We learned that risk rating is not a purely objective exercise. It requires structured judgment grounded in evidence from the interview and observation, and a willingness to justify the number rather than just assign one. That is also where treatment decisions became meaningful. Not every Moderate risk needs the same urgency; a risk that is cheap to mitigate, like starting a visitor logbook, is worth treating even at a lower score, while a Significant risk with no easy fix may need phased action instead of an unrealistic promise to fix it immediately. Choosing between Accept and Mitigate taught us that risk treatment is a resource allocation decision, not a purity test. Small organizations cannot eliminate every risk, and pretending otherwise produces recommendations nobody follows.</p>
+
+    <h2>What This Means Going Forward</h2>
+
+    <p>If this fieldwork changed one thing about how we think about information security, it is this: technical vulnerabilities are usually visible, but the conditions that allow them to persist are usually organizational. A missing lock, a shared password, or an outdated antivirus subscription are rarely accidents. They are symptoms of an environment where security has not yet been given real ownership or priority. Frameworks like NIST SP 800-30 and ISO/IEC 27001 exist because identifying a risk is only the first step; deciding what to do about it, and revisiting that decision over time, is where the real work lives.</p>
+
+    <p>For a group of BSIT students, this assessment was as much a lesson in structured reasoning and professional communication as in cybersecurity fundamentals. We did not walk away with a list of things to be alarmed about. We walked away with a clearer sense of how risk gets identified, weighed, and managed in the resource-constrained reality of a real organization, rather than in the clean hypotheticals of a textbook.</p>
+
+  </div>
+
+  <div class="references">
+    <h2>References</h2>
+    <ol>
+      <li>International Organization for Standardization. (2022). <em>Information security, cybersecurity and privacy protection: Information security management systems: Requirements</em> (ISO/IEC 27001:2022).</li>
+      <li>Ross, R. (2012). <em>Guide for conducting risk assessments</em> (NIST Special Publication 800-30, Rev. 1). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-30r1">https://doi.org/10.6028/NIST.SP.800-30r1</a></li>
+      <li>Verizon Business. (2025). <em>2025 data breach investigations report</em>. Verizon.</li>
+    </ol>
+  </div>
+
+  <div class="byline-block">
+    Written by Rhen Carl Suan on behalf of the group &middot; BSIT, IT-33 &middot; Father Saturnino Urios University
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">Rhen Carl Suan &middot; BSIT, Father Saturnino Urios University</div>
+</footer>
+
+</body>
+</html>

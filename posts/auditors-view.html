@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Could We Prove It? Revisiting Our Risk Assessment as Auditors | Field Notes</title>
+<meta name="description" content="A second look at a risk assessment through an auditor's eyes: asset ownership, classification, evidence, and the gaps an audit would find.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-title" href="../index.html">Field Notes</a>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="article-main">
+
+  <div class="article-meta">
+    October 2026 <span class="dot">&middot;</span> Information Assurance and Security <span class="dot">&middot;</span> 8 min read
+  </div>
+
+  <h1 class="article-title">Could We Prove It? Revisiting Our Risk Assessment as Auditors</h1>
+
+  <p class="article-standfirst">
+    Our first pass at the Risk Assessment Form asked what could go wrong. An auditor asks something harder: can you show me, with evidence, that you know what you own and that your controls work?
+  </p>
+
+  <div class="confidentiality-note">
+    <strong>A note on confidentiality.</strong> The organization we assessed is discussed in general terms only. No individuals are named, and no specific vulnerabilities or system details are disclosed.
+  </div>
+
+  <div class="article-body">
+
+    <p>After we finished our fieldwork and our first reflection, our group went back to the Risk Assessment Form with a different question in mind. Instead of asking what could go wrong, we asked what an auditor would ask: can the organization demonstrate that it knows what it owns, who is responsible for each asset, and that its controls actually work? It sounds like a small change in perspective. It turned out to change how we read almost every row of our form.</p>
+
+    <p>An auditor does not take anyone's word for anything. A manager saying &ldquo;we back up our files&rdquo; is a claim, not a fact, until there is a record that shows when the backup ran, where it went, and whether anyone has ever restored from it. Looking at our own form through that lens was humbling, because much of what we had written down came from conversation and observation, and an audit needs something more durable than that.</p>
+
+    <h2>Does the Organization Know What It Owns?</h2>
+
+    <p>The first thing an auditor looks for is an inventory. ISO/IEC 27002:2022 places this at the foundation of its organizational controls, expecting information and other associated assets to be identified, recorded, and assigned an owner (International Organization for Standardization, 2022a). NIST takes the same position for technology, listing system component inventory as a core control that should be accurate, current, and tied to accountability (Joint Task Force, 2020).</p>
+
+    <p>Here is the uncomfortable part. The asset column in our Risk Assessment Form was, as far as we could tell, the most complete list of assets the organization had ever seen. We built it ourselves during the visit by walking around and asking questions. The organization did not hand us a register; the knowledge lived in people's heads. Everyone could tell us roughly what equipment and records existed, but nobody could point to a single document that said so. An auditor would treat that as a finding even if every asset were well cared for, because an asset that is not recorded cannot be shown to be protected, reviewed, or retired properly.</p>
+
+    <h2>Which Assets Mattered Most</h2>
+
+    <p>When we ranked our assets by the consequence of losing them, a clear order emerged. Customer and billing records sat at the top, because losing their confidentiality or availability would hurt both the business and the people whose information it holds. Close behind were business email and online accounts, which act as keys to nearly everything else, followed by the staff computers that process the records, the network equipment that connects them, and the backups that determine whether recovery is possible at all. Paper personnel files mattered too, partly because physical records are easy to forget when everyone is thinking about computers.</p>
+
+    <p>Classification is how an organization turns that ranking into handling rules. ISO/IEC 27002:2022 asks that information be classified according to confidentiality, integrity, availability, and legal requirements, so that protection matches value (International Organization for Standardization, 2022a). For a small business, three tiers are enough: public, internal, and confidential. Records containing personal information would fall under confidential, which in the Philippine setting also connects to obligations under the Data Privacy Act of 2012. In our assessment, nothing was formally classified. People handled sensitive and routine information with the same habits, which is exactly the situation classification is meant to prevent.</p>
+
+    <p>Ownership was the other half of the problem. An auditor distinguishes between an asset owner, who is accountable for the asset and decides how it is protected, and a custodian, who does the daily work of looking after it. In small organizations these roles blur, and the person who happens to hold the password quietly becomes the owner by default. We found that responsibility was usually understood but rarely assigned. A manager should own the customer records, with a named custodian handling access and backups, and that arrangement should be written down.</p>
+
+    <h2>What Evidence an Audit Would Require</h2>
+
+    <p>NIST's assessment guidance describes three ways to verify a control: examine documents and records, interview people, and test the control directly (Joint Task Force, 2022). Reflecting on our own method, we realized we had relied heavily on two of the three. We observed and we interviewed, but we did not test, and we mostly could not examine records because few existed.</p>
+
+    <p>An auditor would want to see evidence at two levels. The first is design: is there a policy or procedure that says what should happen? The second is operation: is there proof that it actually happens? For the controls our group discussed, that translates into practical artifacts. For backups, dated logs and a record of at least one successful restore test. For user access, a list of accounts with approvals and a record showing that accounts of people who left were removed. For software protection, update or patch reports. For physical access, visitor logs. For awareness, attendance sheets and signed acknowledgements of policy. And for all of it, some record that a manager reviewed the results on a regular schedule.</p>
+
+    <h2>Gaps an Auditor Would Likely Uncover</h2>
+
+    <p>Reading our form as an auditor, the gaps fell into a few repeating patterns rather than a long list of unrelated problems.</p>
+
+    <p>First, there was no inventory, so completeness could not be demonstrated. Second, ownership was implied rather than assigned, which means no one could be held accountable when a control lapsed. Third, many controls existed informally, as habits and verbal agreements, but left no records, so they could not be proven. Fourth, without classification, handling rules were inconsistent. Fifth, and most important, there was no review cycle. Nobody was responsible for periodically checking that a control still worked, which is the difference between a control that is in place and a control that is effective.</p>
+
+    <p>That last distinction matters because ISO/IEC 27001:2022 expects an organization to evaluate its security performance, keep documented information as evidence, and conduct internal audits at planned intervals (International Organization for Standardization, 2022b). A control that nobody checks will drift. Passwords get shared again, backups quietly stop, and the original risk comes back without anyone noticing.</p>
+
+    <h2>How an Inventory and Checklist Would Strengthen Our Treatments</h2>
+
+    <p>Looking back, the treatments our group recommended were reasonable, but each one was written as an action rather than as something verifiable. A recommendation to improve backups is good advice. A recommendation tied to a named asset, a named owner, a stated classification, and a specific piece of evidence is something an organization can actually be held to.</p>
+
+    <p>An asset inventory would give every row in our form a home. Each asset would carry an identifier, a description, a classification, an owner, a custodian, a location, and a review date. Our Risk Assessment Form would then link to that register, so that every risk points to an asset and every treatment points to an owner. The inventory also protects the form's own numbers. The ratings we assigned after treatment are predictions, and they only become credible once there is evidence that the treatment was carried out and works.</p>
+
+    <p>An audit checklist would turn that evidence into a routine. For each asset, the questions are simple. Is it listed? Does it have a named owner? Is it classified? Is the control documented? Is there a record showing the control operated? When was it last tested, and by whom? Asked quarterly by someone other than the person who runs the control, those six questions would catch most of the drift we worried about, and they cost almost nothing to ask.</p>
+
+    <h2>Closing Reflection</h2>
+
+    <p>Our first reflection concluded that technical weaknesses persist because of organizational conditions. Revisiting the form as auditors sharpened that idea. The deepest weakness we found was not a missing tool but a missing ability to prove anything: no register of what exists, no recorded accountability, and no evidence trail. Those are inexpensive to fix compared with most technical controls, and they make every other treatment more believable.</p>
+
+    <p>For a group of students, the lesson was that security is not only about doing the right things but about being able to show that they were done. An organization that can answer &ldquo;what do you own, who is responsible, and how do you know it works&rdquo; is already far more secure, and far more audit-ready, than one that simply feels careful.</p>
+
+  </div>
+
+  <div class="references">
+    <h2>References</h2>
+    <ol>
+      <li>International Organization for Standardization. (2022a). <em>Information security, cybersecurity and privacy protection: Information security controls</em> (ISO/IEC 27002:2022).</li>
+      <li>International Organization for Standardization. (2022b). <em>Information security, cybersecurity and privacy protection: Information security management systems: Requirements</em> (ISO/IEC 27001:2022).</li>
+      <li>Joint Task Force. (2020). <em>Security and privacy controls for information systems and organizations</em> (NIST Special Publication 800-53, Rev. 5). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-53r5">https://doi.org/10.6028/NIST.SP.800-53r5</a></li>
+      <li>Joint Task Force. (2022). <em>Assessing security and privacy controls in information systems and organizations</em> (NIST Special Publication 800-53A, Rev. 5). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-53Ar5">https://doi.org/10.6028/NIST.SP.800-53Ar5</a></li>
+    </ol>
+  </div>
+
+  <div class="byline-block">
+    Written by Rhen Carl Suan on behalf of the group &middot; BSIT, IT-33 &middot; Father Saturnino Urios University
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    Rhen Carl Suan &middot; BSIT, Father Saturnino Urios University
+  </div>
+</footer>
+
+</body>
+</html>

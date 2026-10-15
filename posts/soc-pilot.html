@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pilot or Passenger? Judging the SOC Pilot Model | Field Notes</title>
+<meta name="description" content="Is the autonomous SOC with human SOC pilots realistic and responsible? An evaluation of where AI can act alone, where humans must stay, and what happens when asset data is wrong.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-title" href="../index.html">Field Notes</a>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="article-main">
+
+  <div class="article-meta">
+    October 2026 <span class="dot">&middot;</span> Information Assurance and Security <span class="dot">&middot;</span> 9 min read
+  </div>
+
+  <h1 class="article-title">Pilot or Passenger? Judging the SOC Pilot Model</h1>
+
+  <p class="article-standfirst">
+    IBM's vision of an autonomous security operations center turns analysts into &ldquo;SOC pilots.&rdquo; It is an appealing picture, but whether it is realistic and responsible depends on something far less glamorous than AI: knowing what your assets are.
+  </p>
+
+  <div class="article-body">
+
+    <p>In a 2025 article for IBM, John Velisaris argues that security operations should change the way commercial aviation did in the middle of the last century. Machines would handle the routine flying, and humans would step in only in limited situations. Applied to a security operations center, that means autonomous systems run standard operations while analysts become &ldquo;SOC pilots&rdquo; who choose where and when to get involved, taking command when something unfamiliar appears, such as a zero-day attack (Velisaris, 2025). It is a vivid image, and as a student preparing to enter this field I find it both exciting and a little unsettling. This post evaluates whether the model is realistic, whether it is responsible, and what it would take for people like me to be pilots rather than passengers.</p>
+
+    <h2>What the Article Actually Claims</h2>
+
+    <p>It helps to read the argument carefully before judging it. Velisaris explains that automation already works well in closed systems, such as endpoint detection and response tools, where the software and its console understand all the relevant variables. In open environments built around a SIEM, automation usually runs through SOAR playbooks, and those playbooks depend on certainty. His example is a playbook that quarantines a host only if it is not a server and is showing known malicious behavior, which cannot fire unless the asset's identity is known (Velisaris, 2025).</p>
+
+    <p>That leads to his central point: context is paramount, and today human analysts supply it through slow, manual &ldquo;swivel chair&rdquo; work. His proposed fix is a multi-agent system in which an orchestrator notices missing asset context, asks other agents tied to vulnerability management, configuration databases, and endpoint tools to fill the gap, and then decides on a response. In his example, the system concludes that a device is a workstation based on its hostname and network location. It is also worth noting that the article is honest about its limits. Velisaris says it is still unknown whether analysts will actually move into the pilot chair, and that a fully autonomous SOC has yet to be realized (Velisaris, 2025). Since the author is an IBM services executive writing about an IBM product, I read the vision as a credible direction of travel, not as a settled result.</p>
+
+    <h2>Is the Model Realistic?</h2>
+
+    <p>In part, yes. Alert fatigue, noisy data, and repetitive investigation are real problems, and routine triage is exactly the kind of work machines handle well. Gathering logs, checking an address against threat intelligence, grouping duplicate alerts, and drafting an investigation timeline are tasks where speed and consistency matter more than judgment.</p>
+
+    <p>The airline comparison, however, is weaker than it first appears. Autopilot works in an environment that is heavily instrumented, standardized, and governed by procedures that have been tested for decades. Pilots are also trained continuously, in simulators, so that their skills do not fade while the machine does most of the flying. A SOC is a messier environment. The adversary actively tries to deceive the system, the data about the organization's own assets is often incomplete, and there is no equivalent of a certified flight manual. So the model is realistic for routine operations in well-understood environments, and much less so for the organizations that need it most, which are the ones with sprawling, poorly documented infrastructure.</p>
+
+    <h2>Where AI Can Safely Act on Its Own</h2>
+
+    <p>The safest place for autonomy is where actions are reversible, narrow in effect, and based on strong evidence. I would put three kinds of work in that category. The first is enrichment and investigation, because reading and correlating data changes nothing in the environment. The second is closing clearly benign or duplicate alerts, as long as the decisions are logged so they can be reviewed. The third is low-impact containment, such as isolating a confirmed workstation that is showing unambiguous malicious behavior, because the damage from a mistake is small and the action can be undone quickly.</p>
+
+    <p>The common thread is the cost of being wrong. If a mistaken action can be reversed in minutes and affects one ordinary device, a machine can act first and a human can review afterward. That is the same logic risk assessment taught our group: the right treatment depends on impact and probability together, not on what the technology happens to be capable of.</p>
+
+    <h2>Where Human Judgment Must Remain</h2>
+
+    <p>Humans should stay in the loop wherever an action is hard to undo, affects the business broadly, or involves situations the system has not seen before. Isolating a production server, disabling a senior employee's account, or taking a customer-facing service offline can cause more damage than the attack itself. Novel threats are the other category, and Velisaris himself assigns them to human pilots, since a zero-day by definition resembles nothing the system was trained or configured to recognize (Velisaris, 2025).</p>
+
+    <p>There is also a question of accountability that technology cannot answer. NIST's AI Risk Management Framework asks organizations to define and differentiate roles and responsibilities for human and AI configurations, and to define, assess, and document the processes for human oversight (Tabassi, 2023). In plain terms, a responsible SOC must be able to say who is accountable when an autonomous agent acts. &ldquo;The machine decided&rdquo; is not an answer that a manager, a regulator, or a customer will accept. Minimal human involvement is only responsible if the humans who remain are clearly empowered and clearly answerable.</p>
+
+    <h2>When the Asset Information Is Incomplete or Wrong</h2>
+
+    <p>This is the part of the model that worries me most, because the whole design leans on asset context. The IBM example works because the system correctly decides that a device is a workstation. But that conclusion came from a hostname and a network location, which are patterns, not facts. If a critical server happens to be named like a workstation, or sits on a network segment where workstations usually live, the agent would apply the wrong playbook with complete confidence. If its source of truth, such as a configuration database, is out of date, the agent inherits the error and acts on it at machine speed.</p>
+
+    <p>The failure can go in two directions. The agent might quarantine something important, turning a security alert into a self-inflicted outage. Or it might treat a critical asset as ordinary and respond too weakly, letting an attacker linger on a system that deserved urgent attention. In a multi-agent design there is a third problem: one agent's wrong output becomes the next agent's trusted input, so a small error early in the chain can grow as it travels.</p>
+
+    <p>This connects directly to what our group found during our own risk assessment. The deepest weakness was not a missing tool but a missing, accurate inventory of what the organization owned, who was responsible for each asset, and how important each one was. NIST's control catalog treats inventory as a core control that should be accurate and current, for exactly this reason (Joint Task Force, 2020). An autonomous SOC does not remove the need for that work. It raises the stakes, because the quality of every automated decision is capped by the quality of the asset data underneath it.</p>
+
+    <p>A responsible design therefore needs guardrails around uncertainty. Assets that cannot be identified with confidence should be treated as potentially critical, not as ordinary, so the system fails safe. Agents should act autonomously only above a defined confidence level and escalate below it. Every contextual decision should be logged with the evidence behind it, so analysts can audit it. And the asset data itself should be checked regularly against reality, not trusted indefinitely.</p>
+
+    <h2>My Verdict</h2>
+
+    <p>The SOC pilot model is a realistic direction and a responsible one only under conditions. I would describe the responsible version as supervised autonomy: machines act alone on reversible, low-impact, well-evidenced decisions, humans retain authority over irreversible and novel ones, and the whole arrangement rests on asset information that is accurate and audited. The phrase &ldquo;minimal human involvement&rdquo; is fine as a description of effort, but it would be dangerous as a description of responsibility. The humans may be fewer, but their judgment becomes more concentrated and more important.</p>
+
+    <h2>What I Would Need to Become a SOC Pilot</h2>
+
+    <p>If the routine work is going to the machines, the skills that matter are the ones that supervise and correct them. I see five. The first is deep knowledge of the environment itself: networks, systems, and asset context, because a pilot who cannot tell whether an agent's conclusion about a device makes sense cannot catch its mistakes. My networking and database coursework matters here more than I realized. The second is threat analysis and adversary thinking, since handling the unfamiliar case, the zero-day, is the entire reason pilots exist. The third is AI literacy: understanding how these agents gather context, where they guess, and how they fail, so I can question their output instead of simply accepting it.</p>
+
+    <p>The fourth is decision-making under uncertainty, including the discipline to document why a call was made, since accountability depends on it. The fifth is the habit of staying practiced. A pilot who only watches the autopilot loses the skill needed to take over, so a future SOC pilot would have to keep doing hands-on investigation, run exercises, and audit the machine's decisions on purpose. Communication belongs on that list too, because explaining a risk and a response to managers who are not technical is part of command.</p>
+
+    <p>The way I see it, the people who get replaced will be the ones who only do what the agent does. The people who become pilots will be the ones who understand the environment well enough to know when the agent is wrong. That is a skill set built from fundamentals, which is a reassuring conclusion for a student still building them.</p>
+
+  </div>
+
+  <div class="references">
+    <h2>References</h2>
+    <ol>
+      <li>Joint Task Force. (2020). <em>Security and privacy controls for information systems and organizations</em> (NIST Special Publication 800-53, Rev. 5). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-53r5">https://doi.org/10.6028/NIST.SP.800-53r5</a></li>
+      <li>Tabassi, E. (2023). <em>Artificial intelligence risk management framework (AI RMF 1.0)</em> (NIST AI 100-1). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.AI.100-1">https://doi.org/10.6028/NIST.AI.100-1</a></li>
+      <li>Velisaris, J. (2025, May 8). <em>How agentic AI enables an autonomous SOC with minimal human involvement</em>. IBM Think. <a href="https://www.ibm.com/think/insights/agentic-ai-enables-autonomous-soc">https://www.ibm.com/think/insights/agentic-ai-enables-autonomous-soc</a></li>
+    </ol>
+  </div>
+
+  <div class="byline-block">
+    Written by Rhen Carl Suan &middot; BSIT, IT-33 &middot; Father Saturnino Urios University
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">Rhen Carl Suan &middot; BSIT, Father Saturnino Urios University</div>
+</footer>
+
+</body>
+</html>

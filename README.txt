@@ -6,6 +6,7 @@ Files
   assets/style.css
   posts/risk-assessment-fieldwork.html
   posts/auditors-view.html
+  posts/soc-pilot.html
 
 Deploy (pick one)
   Netlify:      go to app.netlify.com/drop and drag this whole folder in.
